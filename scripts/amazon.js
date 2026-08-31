@@ -1,7 +1,8 @@
-import {cart} from "../data/cart.js"
+
+import {cart, addToCart, updateCartQuantity} from "../data/cart.js";
 import {products} from "../data/products.js";
 
- const messageTimer = {};
+const messageTimer = {};
 
 let productsHTML = '';
 products.forEach((product) => {
@@ -58,43 +59,15 @@ products.forEach((product) => {
 });
 document.querySelector('.js-products-grid').innerHTML = productsHTML;
 
+
 //getting the product to add to cart
 document.querySelectorAll('.js-add-to-cart')
   .forEach((button) => {
     button.addEventListener('click', () => {
       const getProductId = button.dataset.productId;
-
-      //checking to see if the product is already in the cart, using the prodName of the object to be pushed into the cart if no matching item is found
-      let matchingItem;
-      cart.forEach((item) => {
-        if (getProductId === item.prodName) {
-          matchingItem = item;
-        }
-      });
-
-      //if it's in the cart, increase the quantity by 1
-      const selector = Number(document.querySelector(
-      `.js-quantity-selector-${getProductId}`).value);
-
-      if (matchingItem) {
-        matchingItem.quantity += selector;
-
-      //if it is not in the cart, then add it to the cart using the drop down selector       
-      } else {
-         cart.push({
-        prodName: getProductId,
-        quantity: selector
-      });
-      }
-
-      //this is for the cart quantity visible on the page cart icon      
-      let cartQuantity = 0;
-      cart.forEach((cartItem) => {
-        cartQuantity += cartItem.quantity
-      });
-      document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
-
-      console.log(cart);
+      addToCart(getProductId);
+      updateCartQuantity(getProductId);
+      
 
       //this is to make the "Added" message visible to the user
       const addedMessage = document.querySelector(`.added-message-${getProductId}`);
