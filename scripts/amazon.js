@@ -1,4 +1,5 @@
-// import {products} from '../data/products'
+import {cart} from "../data/cart.js"
+import {products} from "../data/products.js";
 
  const messageTimer = {};
 
@@ -111,5 +112,5 @@ document.querySelectorAll('.js-add-to-cart')
 
       console.log (messageTimer);
     });
-          
+
   });
