@@ -1,5 +1,7 @@
 // import {products} from '../data/products'
 
+ const messageTimer = {};
+
 let productsHTML = '';
 products.forEach((product) => {
     productsHTML += `
@@ -42,7 +44,7 @@ products.forEach((product) => {
 
           <div class="product-spacer"></div>
 
-          <div class="added-to-cart">
+          <div class="added-to-cart added-message-${product.id}">
             <img src="images/icons/checkmark.png">
             Added
           </div>
@@ -61,7 +63,7 @@ document.querySelectorAll('.js-add-to-cart')
     button.addEventListener('click', () => {
       const getProductId = button.dataset.productId;
 
-//checking to see if the product is already in the cart, using the prodName of the object to be pushed into the cart if no matching item is found
+      //checking to see if the product is already in the cart, using the prodName of the object to be pushed into the cart if no matching item is found
       let matchingItem;
       cart.forEach((item) => {
         if (getProductId === item.prodName) {
@@ -69,14 +71,14 @@ document.querySelectorAll('.js-add-to-cart')
         }
       });
 
-//if it's in the cart, increase the quantity by 1
+      //if it's in the cart, increase the quantity by 1
       const selector = Number(document.querySelector(
       `.js-quantity-selector-${getProductId}`).value);
 
       if (matchingItem) {
         matchingItem.quantity += selector;
 
-//if it is not in the cart, then add it to the cart using the drop down selector       
+      //if it is not in the cart, then add it to the cart using the drop down selector       
       } else {
          cart.push({
         prodName: getProductId,
@@ -84,7 +86,7 @@ document.querySelectorAll('.js-add-to-cart')
       });
       }
 
-//this is for the cart quantity visible on the page cart icon      
+      //this is for the cart quantity visible on the page cart icon      
       let cartQuantity = 0;
       cart.forEach((cartItem) => {
         cartQuantity += cartItem.quantity
@@ -92,7 +94,22 @@ document.querySelectorAll('.js-add-to-cart')
       document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
 
       console.log(cart);
-    });
-  
-  });
 
+      //this is to make the "Added" message visible to the user
+      const addedMessage = document.querySelector(`.added-message-${getProductId}`);
+
+      //if we click "Add to cart", clear the timer
+      clearTimeout(messageTimer[getProductId]);
+
+      //show it's message again
+      addedMessage.classList.add('added-message-visible');
+
+      //start a fresh 2 seconds timer
+      messageTimer[getProductId] = setTimeout(() => {
+        addedMessage.classList.remove('added-message-visible');
+      }, 2000);
+
+      console.log (messageTimer);
+    });
+          
+  });
