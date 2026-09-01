@@ -1,4 +1,4 @@
-import { cart } from "../data/cart.js";
+import { cart, removeFromCart } from "../data/cart.js";
 import { products } from "../data/products.js";
 import { currencyFormat } from "./utils/money.js";
 
@@ -39,7 +39,7 @@ cart.forEach((cartItem) => {
             <span class="update-quantity-link link-primary">
               Update
             </span>
-            <span class="delete-quantity-link link-primary">
+            <span class="delete-quantity-link link-primary js-delete-link" data-product-id="${matchingProduct.id}">
               Delete
             </span>
           </div>
@@ -91,7 +91,20 @@ cart.forEach((cartItem) => {
     </div> 
   `
 
-  document.querySelector('.js-order-summary').innerHTML = checkoutHTML;
 });
+  document.querySelector('.js-order-summary').innerHTML = checkoutHTML;
+
+  //this section is responsible for deleting products from the checkout page
+
+  //first we have to get the delete link/button
+  document.querySelectorAll('.js-delete-link').forEach((delLink) => {
+    delLink.addEventListener('click', () => {
+      const cartId = delLink.dataset.productId;
+      // Add delete functionality here
+      removeFromCart(cartId)
+      console.log(cart);
+    });
+
+  });
 
 
