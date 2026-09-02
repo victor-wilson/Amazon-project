@@ -67,8 +67,7 @@ document.querySelectorAll('.js-add-to-cart')
     button.addEventListener('click', () => {
       const getProductId = button.dataset.productId;
       addToCart(getProductId);
-      updateCartQuantity(getProductId);
-      
+      updateCartQuantity(getProductId);      
 
       //this is to make the "Added" message visible to the user
       const addedMessage = document.querySelector(`.added-message-${getProductId}`);

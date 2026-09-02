@@ -1,6 +1,9 @@
-import { cart, removeFromCart } from "../data/cart.js";
+import { cart, removeFromCart, updateCartQuantity } from "../data/cart.js";
 import { products } from "../data/products.js";
 import { currencyFormat } from "./utils/money.js";
+
+
+ 
 
 let checkoutHTML = '';
 
@@ -103,23 +106,8 @@ cart.forEach((cartItem) => {
       // Add delete functionality here
       removeFromCart(cartId)
       document.querySelector(`.js-cart-item-container-${cartId}`).remove();
-      console.log(cart);
+      updateCartQuantity();
     });
-
   });
 
-  export function updateCartQuantity () {
-    let cartQuantity = 0;
-  
-    cart.forEach((cartItem) => {
-      cartQuantity += cartItem.quantity;
-    });
-  
-    const cartQuantityElement = document.querySelector('.js-cart-quantity');
-  
-    if (cartQuantityElement) {
-      cartQuantityElement.innerHTML = cartQuantity;
-    }
-  }
-
-
+document.querySelector(`.js-checkout-quantity`).innerHTML = updateCartQuantity();
