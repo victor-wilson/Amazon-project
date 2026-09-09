@@ -1,8 +1,9 @@
-import { cart, removeFromCart, updateCartQuantity } from "../data/cart.js";
+import { cart, removeFromCart, updateCartQuantity, updateDeliveryOption } from "../data/cart.js";
 import { products } from "../data/products.js";
 import { currencyFormat } from "./utils/money.js";
 import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
 import { deliveryOptions } from "../data/deliveryOptions.js";
+
 
 
  updateTheCartQuantity()
@@ -92,7 +93,7 @@ cart.forEach((cartItem) => {
       const isChecked = Option.id === cartItem.deliveryOptionId ? 'checked=checked' : '';
     
       html +=
-      `<div class="delivery-option">
+      `<div class="delivery-option js-delivery-option" data-product-id="${matchingProduct.id}" data-delivery-option-id="${Option.id}">
         <input type="radio" ${isChecked} class="delivery-option-input"
           name="delivery-option-${matchingProduct.id}">
         <div>
@@ -109,7 +110,7 @@ cart.forEach((cartItem) => {
   return html;
 } 
 
-  document.querySelector('.js-order-summary').innerHTML = checkoutHTML;
+  document.querySelector('.js-order-summary').innerHTML = checkoutHTML; 
 
   //this section is responsible for deleting products from the checkout page
 
@@ -128,42 +129,13 @@ cart.forEach((cartItem) => {
     document.querySelector(`.js-checkout-quantity`).innerHTML = (`${updateCartQuantity()} items`);
   }
 
-  //this section is responsible for updating the quantity of products in the checkout page
+  //add an event listener to the js-delivery-option class to update the delivery option when clicked
+  document.querySelectorAll('.js-delivery-option')
+    .forEach((optionElement) => {
+      optionElement.addEventListener('click', () => {
+        const { productId, deliveryOptionId } = optionElement.dataset;
+        updateDeliveryOption(productId, deliveryOptionId);
+        
+      });
+  });
 
-  //comment this code here, incase i to use it later
-  /*<div class="delivery-option">
-            <input type="radio" class="delivery-option-input"
-              name="delivery-option-${matchingProduct.id}">
-            <div>
-              <div class="delivery-option-date">
-                Tuesday, June 21
-              </div>
-              <div class="delivery-option-price">
-                FREE Shipping
-              </div>
-            </div>
-          </div>
-          <div class="delivery-option">
-            <input type="radio" checked class="delivery-option-input"
-              name="delivery-option-${matchingProduct.id}">
-            <div>
-              <div class="delivery-option-date">
-                Wednesday, June 15
-              </div>
-              <div class="delivery-option-price">
-                $4.99 - Shipping
-              </div>
-            </div>
-          </div>
-          <div class="delivery-option">
-            <input type="radio" class="delivery-option-input"
-              name="delivery-option-${matchingProduct.id}">
-            <div>
-              <div class="delivery-option-date">
-                Monday, June 13
-              </div>
-              <div class="delivery-option-price">
-                $9.99 - Shipping
-              </div>
-            </div>
-          </div>*/
