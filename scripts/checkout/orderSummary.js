@@ -11,8 +11,8 @@ export function renderCheckoutPage() {
 
   //the date function.
   const today = dayjs();
-  const deliveryDate = today.add(7, 'days');
-  console.log (deliveryDate.format('dddd, MMMM D'));
+  /*const deliveryDate = today.add(7, 'days');
+  console.log (deliveryDate.format('dddd, MMMM D'));*/
 
 
 
