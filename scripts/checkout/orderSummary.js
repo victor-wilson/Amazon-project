@@ -1,8 +1,8 @@
 import { cart, removeFromCart, updateCartQuantity, updateDeliveryOption } from "../../data/cart.js";
-import { products } from "../../data/products.js";
+import { products, getMatchingProduct } from "../../data/products.js";
 import { currencyFormat } from "../utils/money.js";
 import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
-import { deliveryOptions } from "../../data/deliveryOptions.js";
+import { deliveryOptions, getDeliveryOption } from "../../data/deliveryOptions.js";
 
 export function renderCheckoutPage() {
 
@@ -19,21 +19,22 @@ export function renderCheckoutPage() {
   cart.forEach((cartItem) => {
     const checkoutItems = cartItem.id;
 
-    let matchingProduct;
-    products.forEach((productItems)=> {
+    const matchingProduct = getMatchingProduct(checkoutItems);
+    /*products.forEach((productItems)=> {
       if (productItems.id === checkoutItems){
         matchingProduct = productItems;
       }
-    });
+    });*/
 
     const deliveryOptionId = cartItem.deliveryOptionId;
 
-    let matchingDeliveryOption;
-    deliveryOptions.forEach((option) => {
+    const matchingDeliveryOption = getDeliveryOption(deliveryOptionId);
+
+    /*deliveryOptions.forEach((option) => {
     if (option.id === deliveryOptionId) {
       matchingDeliveryOption = option;
     }
-  });
+  });*/
     
 
 
@@ -52,7 +53,7 @@ export function renderCheckoutPage() {
               ${matchingProduct.name}
             </div>
             <div class="product-price">
-              $${currencyFormat(matchingProduct.priceCents * cartItem.quantity)}
+              $${currencyFormat(matchingProduct.priceCents)}
             </div>
             <div class="product-quantity">
               <span>
