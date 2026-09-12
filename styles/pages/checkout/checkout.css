@@ -68,6 +68,18 @@
   }
 }
 
+.update-quantity-area {
+  display: none;
+}
+
+.update-quantity-area.is-visible {
+  display: inline-block;
+}
+
+.js-new-quantity {
+  width: 50px;
+}
+
 .delivery-date {
   color: rgb(0, 118, 0);
   font-weight: 700;

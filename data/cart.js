@@ -76,6 +76,15 @@ export function removeFromCart (cartId) {
   saveCartToLocalStorage();
 }
 
+export function updateCartItemQuantity (cartId, newQuantity) {
+  cart.forEach((cartItem) => {
+    if (cartItem.id === cartId) {
+      cartItem.quantity = newQuantity;
+    }
+  });
+
+  saveCartToLocalStorage();
+}
 
 export function updateDeliveryOption (getProductId, deliveryOptionId) {
   let matchingItem;
