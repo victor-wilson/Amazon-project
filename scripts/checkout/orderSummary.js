@@ -12,6 +12,7 @@ import { deliveryOptions, getDeliveryOption } from "../../data/deliveryOptions.j
 import { renderPaymentSummary } from "./paymentSummary.js";
 import { calculateDeliveryDate } from '../../dayjs.js';
 
+
 export function renderCheckoutPage() {
 
   updateTheCartQuantity()
@@ -136,6 +137,7 @@ export function renderCheckoutPage() {
       });
     });
 
+    //the part of the code is responsible for the update button
     document.querySelectorAll('.js-update-link').forEach((updateLink) => {
       updateLink.addEventListener('click', () => {
         const productId = updateLink.dataset.productId;
