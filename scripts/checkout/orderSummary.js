@@ -10,7 +10,7 @@ import { currencyFormat } from "../utils/money.js";
 import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
 import { deliveryOptions, getDeliveryOption } from "../../data/deliveryOptions.js";
 import { renderPaymentSummary } from "./paymentSummary.js";
-import { calculateDeliveryDate } from '../../dayjs.js';
+import { calculateDeliveryDate } from '../dayjs.js';
 
 
 export function renderCheckoutPage() {
@@ -18,10 +18,10 @@ export function renderCheckoutPage() {
   updateTheCartQuantity()
 
   //the date function.
+
   const today = dayjs();
   /*const deliveryDate = today.add(7, 'days');
   console.log (deliveryDate.format('dddd, MMMM D'));*/
-
 
 
   let checkoutHTML = '';
