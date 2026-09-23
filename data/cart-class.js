@@ -2,17 +2,17 @@
 
 class Cart {
   cartItems = [];
-  localStorageKey;
+  #localStorageKey;
 
   //this line runs the constructor
   constructor(localStorageKey) {
-    this.localStorageKey = localStorageKey;
-    this.loadFromStorage();
+    this.#localStorageKey = localStorageKey;
+    this.#loadFromStorage();
   }
 
   //this line loads the cart from local storage
-  loadFromStorage () {
-    const savedCart = JSON.parse(localStorage.getItem(this.localStorageKey));
+  #loadFromStorage () {
+    const savedCart = JSON.parse(localStorage.getItem(this.#localStorageKey));
 
     if (savedCart) {
         this.cartItems = savedCart;
@@ -34,7 +34,7 @@ class Cart {
     
   //this line saves the newly added item to local storage
   saveCartToLocalStorage() {
-    localStorage.setItem(this.localStorageKey, JSON.stringify(this.cartItems));
+    localStorage.setItem(this.#localStorageKey, JSON.stringify(this.cartItems));
     }  
    
    //this line adds an item to the cart 
