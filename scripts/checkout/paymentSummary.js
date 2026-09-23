@@ -23,12 +23,6 @@ export function renderPaymentSummary() {
   const taxCents = totalBeforeTaxCents * 0.1;
   const totalCents = totalBeforeTaxCents + taxCents;  
 
-  console.log((productPriceCents/100).toFixed(2));
-  console.log((shippingPriceCents/100).toFixed(2));
-  console.log((totalBeforeTaxCents/100).toFixed(2));
-  console.log((taxCents/100).toFixed(2));
-  console.log((totalCents/100).toFixed(2));
-
   //next we need to generate the html for the payment summary, which is the view in MVC
   const paymentSummaryHTML = `
     <div class="payment-summary-title">

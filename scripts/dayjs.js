@@ -4,7 +4,6 @@ import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 export function dateFormat (){
   const dateElement = dayjs();
   const numberOfDays = dateElement.add(1, 'month');
-  console.log(numberOfDays.format('dddd'));
 }
 
 export function isWeekend(date) {
