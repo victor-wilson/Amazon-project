@@ -63,7 +63,7 @@ export function renderCheckoutPage() {
               ${matchingProduct.name}
             </div>
             <div class="product-price">
-              $${currencyFormat(matchingProduct.priceCents)}
+              ${matchingProduct.getPrice()}
             </div>
             <div class="product-quantity js-quantity-test-${matchingProduct.id}">
               <span>
