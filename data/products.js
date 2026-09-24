@@ -66,7 +66,46 @@ console.log(date.toLocaleTimeString());*/
 logThis();
 logThis.call('hello');*/
 
-export const products = [
+export let products = [];
+
+export function loadProducts(func) {
+  const xhr = new XMLHttpRequest();
+
+  xhr.addEventListener('load', () => {
+    products = JSON.parse(xhr.response).map((productDetails) => {
+      if (productDetails.type === 'clothing') {
+        return new Clothing (productDetails)
+      }
+      return new Products (productDetails);
+    });
+
+    func();
+  });
+
+  xhr.open('GET', 'https://supersimplebackend.dev/products');
+  xhr.send();
+}
+
+export function callBacks (call){
+  const a = 2; 
+  const b = 3; 
+  const c = a + b; 
+  console.log(c); 
+  return call();
+}
+
+
+export function theMainCall() {
+  const message = `
+    <div class="your-pops" style="color:red; text-align: center; font-weight:bold;">
+      Your papa!
+    </div>
+  `;
+  return message;
+}
+
+
+/*export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
     image: "images/products/athletic-cotton-socks-6-pairs.jpg",
@@ -730,4 +769,4 @@ export const products = [
     return new Clothing (productDetails)
   }
   return new Products (productDetails);
-});
+});*/
