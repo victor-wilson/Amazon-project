@@ -15,7 +15,7 @@ describe('Test Suite: renderCheckoutPage', () =>{
     document.querySelector('.js-test-container')
       .innerHTML = 
       `<div class="js-checkout-quantity"></div>
-      <div class="js-order-summary"></div>`;
+      <div class="js-order-summary"></div>`; 
 
       spyOn(localStorage, 'getItem').and.callFake(() => {
         return JSON.stringify([
@@ -31,6 +31,7 @@ describe('Test Suite: renderCheckoutPage', () =>{
           }
         ]);   
       });
+      
       loadFromStorage();
       renderCheckoutPage();
 

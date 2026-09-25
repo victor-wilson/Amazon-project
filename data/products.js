@@ -84,6 +84,7 @@ export function loadProducts(func) {
 
   xhr.open('GET', 'https://supersimplebackend.dev/products');
   xhr.send();
+  console.log('load products')
 }
 
 export function callBacks (call){
@@ -98,7 +99,7 @@ export function callBacks (call){
 export function theMainCall() {
   const message = `
     <div class="your-pops" style="color:red; text-align: center; font-weight:bold;">
-      Your papa!
+      call back testing!
     </div>
   `;
   return message;
