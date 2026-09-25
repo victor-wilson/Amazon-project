@@ -1,12 +1,13 @@
 import { dateFormat } from './dayjs.js';
 import {renderCheckoutPage} from './checkout/orderSummary.js';
 import {renderPaymentSummary} from './checkout/paymentSummary.js';
-import { loadProducts, products } from '../data/products.js';
+import { loadProducts, products, loadProductsFetch } from '../data/products.js';
 import { loadCart } from '../data/cart.js';
 //import '../data/cart-class.js';
 //import '../data/backend-practice.js'
 
 Promise.all([
+  loadProductsFetch(),
   new Promise((resolve)=>{
     loadProducts(()=>{   
       resolve('value 1');
