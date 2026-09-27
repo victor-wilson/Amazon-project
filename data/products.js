@@ -54,6 +54,7 @@ class Clothing extends Products {
   }
 }
 
+
 /*
 //Exaple of a javascript built-in Class is the new Date class
 const date = new Date();
@@ -91,7 +92,7 @@ export function loadProductsFetch () {
 });
 */
 
-
+/*
 export function loadProducts(func) {
   const xhr = new XMLHttpRequest();
 
@@ -127,7 +128,7 @@ export function theMainCall() {
     </div>
   `;
   return message;
-}
+}*/
 
 
 /*export const products = [

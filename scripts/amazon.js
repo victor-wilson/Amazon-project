@@ -1,12 +1,14 @@
 
 import {cart, addToCart, updateCartQuantity} from "../data/cart.js";
-import {products, loadProducts, callBacks, theMainCall} from "../data/products.js";
+import {products, loadProductsFetch} from "../data/products.js";
 import { currencyFormat } from "./utils/money.js";
 
-loadProducts(renderProductsGrid);
-const mainCallMessage = callBacks(theMainCall);
+/*loadProducts(renderProductsGrid);
+const mainCallMessage = callBacks(theMainCall);*/
+loadProductsFetch().then(renderloadProductsFetch)
 
-function renderProductsGrid () {
+
+function renderloadProductsFetch(){
 
   const messageTimer = {};
 
@@ -14,8 +16,6 @@ function renderProductsGrid () {
   products.forEach((product) => {
       productsHTML += `
       <div class="product-container">
-        ${mainCallMessage}
-
             <div class="product-image-container">
               <img class="product-image"
                 src="${product.image}">
