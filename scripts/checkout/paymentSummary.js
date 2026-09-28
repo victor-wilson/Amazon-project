@@ -2,6 +2,7 @@ import {cart, updateCartQuantity} from '../../data/cart.js';
 import {getMatchingProduct} from '../../data/products.js';
 import { getDeliveryOption } from '../../data/deliveryOptions.js';
 import {currencyFormat} from '../utils/money.js';
+import { addOrders } from '../../data/orders.js';
 
 //there are 3 software engineering steps we follow to do this
 //first we save the data, which is the model in MVC
@@ -54,15 +55,44 @@ export function renderPaymentSummary() {
         <div class="payment-summary-money">$${currencyFormat(totalCents)}</div>
       </div>
 
-      <button class="place-order-button button-primary">
+      <button class="place-order-button button-primary js-place-order">
         Place your order
       </button>
   `;
 
   document.querySelector('.js-payment-summary-content').innerHTML = paymentSummaryHTML;
+
+
+  document.querySelector('.js-place-order').addEventListener('click', 
+    async () => {
+      try {
+        const response = await fetch('https://supersimplebackend.dev/orders', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            cart: cart.map((cartItem) => ({
+              productId: cartItem.id,
+              quantity: cartItem.quantity
+            }))
+
+          }),
+          });
+
+          const order = await response.json();
+          addOrders (order);
+          console.log(order);
+
+      } catch (error) {
+        console.log('unexpected error, pls try again later')
+      }
+
+      window.location.href = 'orders.html';
+
+  });
+
   return paymentSummaryHTML;
-
 } 
-
 
 
