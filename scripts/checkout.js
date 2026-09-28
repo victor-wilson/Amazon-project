@@ -6,20 +6,28 @@ import { loadCart } from '../data/cart.js';
 //import '../data/cart-class.js';
 //import '../data/backend-practice.js'
 
-
+//thisw function is responsible for fetching the products from back-end
 async function loadPage () {
 
-  await loadProductsFetch();
-  
-  await new Promise((resolve) =>{
-    loadCart(() =>{
-      resolve();
-    });
-  });
+ // throw 'error 1'
 
+  try{
+    await loadProductsFetch();
+
+    await new Promise((resolve, reject) =>{
+      
+      loadCart(() =>{
+        //reject('error 2')
+        resolve();
+      });
+    });
+
+  } catch (error) {
+    console.log('Unexpected error in async await function');
+  }
   renderCheckoutPage();
   dateFormat();
-  renderPaymentSummary()
+  renderPaymentSummary();
 }
 loadPage();
 
